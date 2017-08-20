@@ -1,5 +1,4 @@
-﻿
-namespace Microsoft.VisualStudio.TestPlatform.Extension.Xunit.Xml.TestLogger
+﻿namespace Microsoft.VisualStudio.TestPlatform.Extension.Xunit.Xml.TestLogger
 {
     using System;
     using System.Collections.Generic;
@@ -231,7 +230,7 @@ namespace Microsoft.VisualStudio.TestPlatform.Extension.Xunit.Xml.TestLogger
                 Directory.CreateDirectory(loggerFileDirPath);
             }
 
-            using (var f = File.Create(outputFilePath))
+            using (var f = new StreamWriter(File.Create(outputFilePath), new UTF8Encoding(false, true)))
             {
                 doc.Save(f);
             }
