@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26507.0
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3FB5E8BF-B24A-4246-97B8-B98E028457BF}"
 EndProject
@@ -22,6 +22,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restore", "src\ExternalPackage\Restore.csproj", "{5E600330-4DDD-4D5A-B668-E8AD545025DD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xunit.Xml.TestLogger.NetFull.Tests", "test\Xunit.Xml.TestLogger.NetFull.Tests\Xunit.Xml.TestLogger.NetFull.Tests.csproj", "{269D6102-6163-4AD8-A89A-9965B9F24A52}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JUnit.Xml.TestLogger", "src\JUnit.Xml.TestLogger\JUnit.Xml.TestLogger.csproj", "{9EB711F6-0BDA-42E1-A868-344AF257C7E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Junit.Xml.TestLogger.NetCore.Tests", "test\Junit.Xml.TestLogger.NetCore.Tests\Junit.Xml.TestLogger.NetCore.Tests.csproj", "{7F33EEBD-BA2B-41BE-9DD6-8637B3EC6701}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Junit.Xml.TestLogger.NetFull.Tests", "test\Junit.Xml.TestLogger.NetFull.Tests\Junit.Xml.TestLogger.NetFull.Tests.csproj", "{1E44B86E-ED9D-4C51-BC5B-49DB2598E556}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,18 @@ Global
 		{269D6102-6163-4AD8-A89A-9965B9F24A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{269D6102-6163-4AD8-A89A-9965B9F24A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{269D6102-6163-4AD8-A89A-9965B9F24A52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EB711F6-0BDA-42E1-A868-344AF257C7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EB711F6-0BDA-42E1-A868-344AF257C7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EB711F6-0BDA-42E1-A868-344AF257C7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EB711F6-0BDA-42E1-A868-344AF257C7E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F33EEBD-BA2B-41BE-9DD6-8637B3EC6701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F33EEBD-BA2B-41BE-9DD6-8637B3EC6701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F33EEBD-BA2B-41BE-9DD6-8637B3EC6701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F33EEBD-BA2B-41BE-9DD6-8637B3EC6701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E44B86E-ED9D-4C51-BC5B-49DB2598E556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E44B86E-ED9D-4C51-BC5B-49DB2598E556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E44B86E-ED9D-4C51-BC5B-49DB2598E556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E44B86E-ED9D-4C51-BC5B-49DB2598E556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +88,11 @@ Global
 		{FAA6D063-39D2-4F32-997C-6DA27BC9B489} = {3FB5E8BF-B24A-4246-97B8-B98E028457BF}
 		{5E600330-4DDD-4D5A-B668-E8AD545025DD} = {FAA6D063-39D2-4F32-997C-6DA27BC9B489}
 		{269D6102-6163-4AD8-A89A-9965B9F24A52} = {2A90596D-42AC-49DB-B5BF-72E1AFD7A066}
+		{9EB711F6-0BDA-42E1-A868-344AF257C7E5} = {3FB5E8BF-B24A-4246-97B8-B98E028457BF}
+		{7F33EEBD-BA2B-41BE-9DD6-8637B3EC6701} = {2A90596D-42AC-49DB-B5BF-72E1AFD7A066}
+		{1E44B86E-ED9D-4C51-BC5B-49DB2598E556} = {2A90596D-42AC-49DB-B5BF-72E1AFD7A066}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25D37E80-4819-4733-831F-7058690756D6}
 	EndGlobalSection
 EndGlobal

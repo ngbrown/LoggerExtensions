@@ -152,11 +152,6 @@ function Invoke-Build
     Write-Log "Invoke-Build: Start build."
     $dotnetExe = Get-DotNetPath
 
-    #remove previously built packages to force getting them from the nugetPackages directory.
-    Remove-Item -Recurse -Force (Join-Path $env:LE_PACKAGES_DIR "appveyor.testlogger") -ErrorAction Ignore
-    Remove-Item -Recurse -Force (Join-Path $env:LE_PACKAGES_DIR "junitxml.testlogger") -ErrorAction Ignore
-    Remove-Item -Recurse -Force (Join-Path $env:LE_PACKAGES_DIR "xunitxml.testlogger") -ErrorAction Ignore
-
     Write-Log ".. .. Build: Source: $LEB_Solution"
     Write-Log "$dotnetExe build $LEB_Solution --configuration $LEB_Configuration -v:minimal -p:Version=$LEB_FullVersion"
     & $dotnetExe build $LEB_Solution --configuration $LEB_Configuration -v:minimal -p:Version=$LEB_FullVersion
@@ -173,6 +168,11 @@ function Run-Test
 {
     $timer = Start-Timer
     $dotnetExe = Get-DotNetPath
+
+    #remove previously built packages.
+    Remove-Item -Recurse -Force (Join-Path $env:LE_PACKAGES_DIR "appveyor.testlogger") -ErrorAction Ignore
+    Remove-Item -Recurse -Force (Join-Path $env:LE_PACKAGES_DIR "junitxml.testlogger") -ErrorAction Ignore
+    Remove-Item -Recurse -Force (Join-Path $env:LE_PACKAGES_DIR "xunitxml.testlogger") -ErrorAction Ignore
 
     $testProject = Join-Path $LEB_TestProjectsDir "Appveyor.TestLogger.NetCore.Tests\Appveyor.TestLogger.NetCore.Tests.csproj"
     $testAdapterPath = Join-Path $LEB_TestProjectsDir "Appveyor.TestLogger.NetCore.Tests\bin\$LEB_Configuration\netcoreapp1.0"
@@ -304,6 +304,43 @@ function Set-ScriptFailed
     $Script:ScriptFailed = $true
 }
 
+function Edit-XmlNodes {
+param (
+    [xml] $doc = $(throw "doc is a required parameter"),
+    [string] $xpath = $(throw "xpath is a required parameter"),
+    [string] $value = $(throw "value is a required parameter"),
+    [bool] $condition = $true
+)    
+    if ($condition -eq $true) {
+        $nodes = $doc.SelectNodes($xpath)
+         
+        foreach ($node in $nodes) {
+            if ($node -ne $null) {
+                if ($node.NodeType -eq "Element") {
+                    $node.InnerXml = $value
+                }
+                else {
+                    $node.Value = $value
+                }
+            }
+        }
+    }
+}
+
+function Patch-TestProject {
+param (
+    [string]$filename = $(throw "filename is a required parameter"),
+    [string]$loggername = $(throw "loggername is a required parameter"),
+    [string]$version = $(throw "version is a required parameter")
+)
+    $xml = [xml](Get-Content $filename)
+    # <file><foo attribute="bar" attribute2="bar" attribute3="bar" /></file>
+
+    Edit-XmlNodes $xml -xpath "/Project/ItemGroup[0]/PackageReference[@Include='$loggername']/@Version" -value $version
+
+    $xml.save($filename)
+}
+
 
 # Execute build
 $timer = Start-Timer
@@ -320,10 +357,4 @@ Create-NugetPackages
 Invoke-Build
 Run-Test
 Write-Log "Build complete. {$(Get-ElapsedTime($timer))}"
-if ($Script:ScriptFailed) { 
-    Write-Error "Build failed."
-    Exit 1 
-} else { 
-    Write-Log "Build success"
-    Exit 0 
-}
+if ($Script:ScriptFailed) { Exit 1 } else { Exit 0 }
